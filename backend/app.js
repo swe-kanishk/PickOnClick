@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectToDb from "./db/dbConnection.js";
 import userRoutes from "./routes/user.routes.js";
+import captainRoutes from "./routes/captain.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +20,8 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.use("/users", userRoutes);
+app.use("/users", userRoutes); 
+app.use("/captains", captainRoutes); 
 
 app.listen(PORT, () => {
   connectToDb();
