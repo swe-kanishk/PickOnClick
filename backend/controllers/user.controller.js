@@ -55,15 +55,12 @@ export const loginUser = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   const user = req.user
-  if(!user) {
-    return res.status(400).json({message: 'user not found!'})
-  }
   return res.status(200).json(user)
 }
 
 export const logoutUser = async (req, res) => {
-  res.clearCookie();
   const token = req.cookies.token || req.headers.authorization?.split(' ')[0]
   await blacklistTokenModel.create({token})
+  res.clearCookie();
   return res.status(200).json({message: 'Logged out'})
 }
