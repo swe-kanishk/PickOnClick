@@ -26,6 +26,7 @@ export const registerUser = async (req, res) => {
   });
 
   const token = user.generateAuthToken();
+  console.log(user)
 
   res.status(201).json({ token, user });
 };

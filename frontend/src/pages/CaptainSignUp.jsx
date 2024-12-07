@@ -77,7 +77,7 @@ function CaptainSignup() {
             type="submit"
             className="bg-[#111] w-full text-white py-2 mb-5 px-4 rounded-lg"
           >
-            Signup
+            Create Account
           </button>
           <p className="text-center">
             Already on PickOnClick?{" "}
