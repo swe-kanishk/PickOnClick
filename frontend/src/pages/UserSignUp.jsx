@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 
@@ -10,7 +10,7 @@ function UserSignup() {
   const [lastname, setLastname] = useState("");
 
   const navigate = useNavigate();
-  const { user, setUser } = React.useContext(UserDataContext);
+  const { setUser } = useContext(UserDataContext);
 
   const signupHandler = async (e) => {
     e.preventDefault();

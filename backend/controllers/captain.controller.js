@@ -29,7 +29,7 @@ export const registerCaptain = async (req, res) => {
   });
 
   const token = captain.generateAuthToken();
-  res.status(200).json({ token, captain });
+  res.status(201).json({ token, captain });
 };
 
 export const loginCaptain = async (req, res) => {

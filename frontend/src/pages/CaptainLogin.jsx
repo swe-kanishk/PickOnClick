@@ -1,21 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CaptainDataContext } from "../context/CaptainContext";
+import axios from "axios";
 
 function CaptainLogin() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [captainData, setCaptainData] = useState({})
-  
-    const loginHandler = async(e) => {
-      e.preventDefault()
-      setCaptainData({
-          email: email,
-          password: password
-      })
-      setEmail('')
-      setPassword('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { setCaptain } = useContext(CaptainDataContext);
+  const navigate = useNavigate();
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    const captainData = {
+      email: email,
+      password: password,
+    };
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`, captainData)
+      if(response.status === 200){
+        const {token, captain} = response.data
+        localStorage.setItem("token", token)
+        setCaptain(captain)
+        navigate('/captain-home')
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setEmail("");
+      setPassword("");
     }
-  
+  };
+
   return (
     <div className="py-7 flex flex-col justify-between h-screen">
       <div>
@@ -46,7 +62,10 @@ function CaptainLogin() {
             onChange={(e) => setPassword(e.target.value.trim())}
             placeholder="password"
           />
-          <button type="submit" className="bg-[#111] w-full text-white py-2 mb-7 px-4 rounded-lg">
+          <button
+            type="submit"
+            className="bg-[#111] w-full text-white py-2 mb-7 px-4 rounded-lg"
+          >
             Login
           </button>
           <p className="text-center">
@@ -55,18 +74,21 @@ function CaptainLogin() {
               to="/signup"
               className="text-blue-500 underline text-sm underline-offset-2"
             >
-             sign up as Captain!
+              sign up as Captain!
             </Link>
           </p>
         </form>
       </div>
       <div className="px-5">
-        <Link to="/login" className="bg-[#ffbd17] flex items-center justify-center w-full text-black font-medium py-2 px-4 rounded-lg">
+        <Link
+          to="/login"
+          className="bg-[#ffbd17] flex items-center justify-center w-full text-black font-medium py-2 px-4 rounded-lg"
+        >
           Login as User
         </Link>
       </div>
     </div>
-  )
+  );
 }
 
-export default CaptainLogin
+export default CaptainLogin;

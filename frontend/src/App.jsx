@@ -4,10 +4,12 @@ import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import UserSignUp from "./pages/UserSignUp";
 import CaptainLogin from "./pages/CaptainLogin";
-import CaptainSignUp from "./pages/CaptainSignUp";
 import GetStarted from "./pages/GetStarted";
-import UserProtectedWraapper from "./pages/UserProtectedWraapper";
+import UserProtectedWrapper from "./pages/UserProtectedWrapper";
 import UserLogout from "./pages/UserLogout";
+import CaptainSignup from "./pages/CaptainSignUp";
+import CaptainHome from "./pages/CaptainHome";
+import CaptainProtectedWrapper from "./pages/CaptainProtectedWrapper";
 
 const App = () => {
   return (
@@ -17,21 +19,29 @@ const App = () => {
         <Route path="/login" element={<UserLogin />} />
         <Route path="/signup" element={<UserSignUp />} />
         <Route path="/captain-login" element={<CaptainLogin />} />
-        <Route path="/captain-signup" element={<CaptainSignUp />} />
+        <Route path="/captain-signup" element={<CaptainSignup />} />
         <Route
           path="/home"
           element={
-            <UserProtectedWraapper>
+            <UserProtectedWrapper>
               <Home />
-            </UserProtectedWraapper>
+            </UserProtectedWrapper>
+          }
+        />
+        <Route
+          path="/captain-home"
+          element={
+            <CaptainProtectedWrapper>
+              <CaptainHome />
+            </CaptainProtectedWrapper>
           }
         />
         <Route
           path="/logout"
           element={
-            <UserProtectedWraapper>
+            <UserProtectedWrapper>
               <UserLogout />
-            </UserProtectedWraapper>
+            </UserProtectedWrapper>
           }
         />
       </Routes>
