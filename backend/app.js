@@ -9,7 +9,7 @@ import userRoutes from "./routes/user.routes.js";
 import captainRoutes from "./routes/captain.routes.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
