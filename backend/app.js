@@ -25,7 +25,7 @@ app.use("/captains", captainRoutes); 
 
 app.listen(PORT, () => {
   connectToDb();
-  console.log(`App is running on ${PORT} successfully!`);
+  console.log(`App is running on port: ${PORT} successfully!`);
 });
 
 export default app;
